@@ -4,7 +4,8 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 18790;
+const PORT = Number(process.env.PORT) || 18790;
+const HOST = process.env.HOST || '0.0.0.0';
 
 // 配置文件路径
 const CONFIG_PATH = '/root/.openclaw/openclaw.json';
@@ -235,7 +236,7 @@ app.get('/api/config', (req, res) => {
 });
 
 // 启动服务器
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`OpenClaw WebChat (Config Manager) running at http://0.0.0.0:${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`OpenClaw WebChat (Config Manager) running at http://${HOST}:${PORT}`);
   console.log(`Gateway: ws://127.0.0.1:18789`);
 });
